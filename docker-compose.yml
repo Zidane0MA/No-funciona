@@ -1,0 +1,23 @@
+name: fastapi-graficas-mysql 
+
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-app-graficas
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - fastapi-db
+  fastapi-db:
+    image: mysql
+    container_name: db-graficas-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: zidan
+      MYSQL_DATABASE: graficasdb
+      MYSQL_USER: zidan
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
